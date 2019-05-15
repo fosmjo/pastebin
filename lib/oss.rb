@@ -16,5 +16,9 @@ class Oss
       end
       path
     end
+
+    def remove_file(path)
+      FileUtils.rm_f(path)
+    end
   end
 end

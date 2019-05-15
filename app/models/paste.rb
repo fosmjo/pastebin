@@ -15,6 +15,7 @@ class Paste < ApplicationRecord
   SHORTLINK_LEN = 7
 
   before_save :save_content_to_oss
+  after_destroy :remove_content_in_oss
 
   class << self
     def gen_shortlink(remote_ip)
@@ -22,10 +23,18 @@ class Paste < ApplicationRecord
       str = Base62.encode(num)
       str[0...SHORTLINK_LEN]
     end
+
+    def clear_expired_pastes
+      where.not(expired_at: nil).where('expired_at < ?', Time.now).destroy_all
+    end
   end
 
   def save_content_to_oss
     self.path = Oss.store_file(content)
+  end
+
+  def remove_content_in_oss
+    Oss.remove_file(path)
   end
 
   def content
