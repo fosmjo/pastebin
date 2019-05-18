@@ -1,0 +1,5 @@
+sidekiq:
+  redis:
+    host: <%= ENV["SIDEKIQ_REDIS_HOST"] || 'redis' %>
+    port: <%= ENV["SIDEKIQ_REDIS_PORT"] || 6379 %>
+    password: <%= ENV["SIDEKIQ_REDIS_PASSWORD"] || '' %>

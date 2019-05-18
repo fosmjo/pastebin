@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   resource :pastes, only: %i[create]
   get 'pastes/:shortlink', to: 'pastes#show'
 
+  mount Sidekiq::Monitor::Engine => '/sidekiq'
 end
