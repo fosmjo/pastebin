@@ -19,6 +19,8 @@
 
 # Learn more: http://github.com/javan/whenever
 
+set :output, '/var/log/whenever.log'
+
 every 1.day, at: '1:00 am' do
   runner "Paste.clear_expired_pastes"
 end
