@@ -84,5 +84,5 @@ test:
 production:
   <<: *default
   database: pastebin_production
-  username: pastebin
-  password: <%= ENV['PASTEBIN_DATABASE_PASSWORD'] %>
+  username: <%= ENV.fetch("PASTEBIN_DATABASE_USERNAME") { 'root' } %>
+  password: <%= ENV.fetch("PASTEBIN_DATABASE_PASSWORD") { 'root' } %>

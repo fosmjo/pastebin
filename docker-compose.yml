@@ -1,0 +1,46 @@
+version: '2'
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    networks:
+      - webnet
+    restart: always
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    networks:
+      - webnet
+    restart: always
+  web:
+    image: fosmjo/pastebin
+    command: './start.sh'
+    ports:
+      - "4000:80"
+    volumes:
+      - web_data:/data
+    networks:
+      - webnet
+    restart: always
+    depends_on:
+      - db
+      - redis
+
+networks:
+  webnet:
+
+volumes:
+  pg_data:
+  redis_data:
+  web_data:
+

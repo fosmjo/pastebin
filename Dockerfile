@@ -1,5 +1,5 @@
 FROM ruby:2.6.3
-RUN apt-get update && apt-get -y install cron && apt-get -y install nodejs
+RUN apt-get update && apt-get -y install cron nodejs
 RUN touch /var/log/whenever.log && chmod go+rw /var/log/whenever.log
 ENV RAILS_ENV=production
 ENV RACK_ENV=production
