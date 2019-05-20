@@ -18,12 +18,12 @@ services:
       - "6379:6379"
     volumes:
       - redis_data:/data
-    command: redis-server --appendonly yes
+    command: redis-server
     networks:
       - webnet
     restart: always
   web:
-    image: fosmjo/pastebin
+    image: fosmjo/pastebin:latest
     command: './start.sh'
     ports:
       - "4000:80"
@@ -35,6 +35,16 @@ services:
     depends_on:
       - db
       - redis
+  worker:
+    image: fosmjo/pastebin:latest
+    command: bash -c "bundle exec rake db:create db:migrate && bundle exec sidekiq"
+    networks:
+      - webnet
+    restart: always
+    depends_on:
+      - db
+      - redis
+      - web
 
 networks:
   webnet:
