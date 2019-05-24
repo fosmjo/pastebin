@@ -5,10 +5,10 @@ ENV RAILS_ENV=production
 ENV RACK_ENV=production
 ENV PORT=80
 WORKDIR /pastebin
-ADD Gemfile /pastebin/Gemfile
-ADD Gemfile.lock /pastebin/Gemfile.lock
+COPY Gemfile /pastebin/Gemfile
+COPY Gemfile.lock /pastebin/Gemfile.lock
 RUN bundle install --without development test
-ADD ./ /pastebin/
+COPY ./ /pastebin/
 RUN mkdir -p tmp/pids
 EXPOSE 80
 HEALTHCHECK CMD curl -f http://localhost/healths/check || exit 1
