@@ -23,6 +23,7 @@ services:
       - webnet
     restart: always
   web:
+    build: ./
     image: fosmjo/pastebin:latest
     command: './start.sh'
     ports:
