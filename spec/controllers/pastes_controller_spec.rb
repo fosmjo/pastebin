@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe PastesController, type: :controller do
+  login_user
+
   let(:paste) { FactoryBot.build(:paste) }
 
   context 'create' do
