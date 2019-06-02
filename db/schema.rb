@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_30_131827) do
+ActiveRecord::Schema.define(version: 2019_06_02_095452) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,7 +20,9 @@ ActiveRecord::Schema.define(version: 2019_05_30_131827) do
     t.string "path", limit: 255, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
     t.index ["created_at"], name: "index_pastes_on_created_at"
+    t.index ["user_id"], name: "index_pastes_on_user_id"
   end
 
   create_table "sidekiq_jobs", force: :cascade do |t|
