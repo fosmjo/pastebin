@@ -6,3 +6,11 @@ sidekiq:
 
 oss:
   path: <%= File.join(Rails.root, 'storage') %>
+
+mail:
+  smtp:
+    user_name: <%= ENV["SMTP_USER_NAME"] %>
+    password: <%= ENV["SMTP_PASSWORD"] %>
+  default_url_options:
+    host: <%= ENV["MAIL_URL_HOST"] || 'localhost' %>
+    port: <%= ENV["MAIL_URL_PORT"] || 3000 %>
