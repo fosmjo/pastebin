@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
 
+  root to: 'pastes#index'
+
   get 'healths/check', to: 'healths#check'
 
   resource :pastes, only: %i[create]
